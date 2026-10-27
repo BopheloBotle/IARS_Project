@@ -1,0 +1,4 @@
+config,rise_time,settling_time,overshoot_ratio,steady_state_error,rms_error,max_abs_error
+Underdamped (low Kd),0.0,199.9500,0.5741,1.547583,1.527118,1.946428
+Well-tuned,0.0,21.6000,1.2185,0.324839,0.291092,0.735221
+Aggressive / oscillatory,0.0,20.4000,1.1284,0.064946,0.210143,0.678672

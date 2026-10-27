@@ -1,0 +1,64 @@
+
+ETHICS, RISK, AND RESPONSIBLE AUTONOMY
+======================================
+
+1. Bias and reliability risks in sensor data, simulation assumptions, and learned models
+---------------------------------------------------------------------------------------
+LiDAR and camera simulations used here assume relatively clean geometry, Gaussian
+range noise, and lighting-invariant greyscale patches. Real South African outdoor
+and informal-settlement environments introduce dust, glare, non-Lambertian surfaces,
+and clutter that violate these assumptions. Datasets labelled by a rule-based expert
+policy encode that expert's biases (e.g., always prefer left when tied); a neural
+network will reproduce those preferences and may systematically fail on under-
+represented edge cases. Simulation-to-reality gap is therefore an ethical risk:
+over-trusting high simulation accuracy can understate real harm potential.
+
+2. Transparency and explainability challenges in neural-network decision-making
+------------------------------------------------------------------------------
+The MLP maps sector ranges and goal bearing to discrete actions. Intermediate
+hidden units do not correspond to human-interpretable rules. In incident review
+(collision, near-miss), stakeholders need causal accounts ("why turn left?").
+Pure network outputs complicate accountability. Mitigations used conceptually in
+this project: (i) keep a rule-based safety envelope (hard STOP if front < threshold)
+overriding the network; (ii) log features + predicted action for post-hoc audit;
+(iii) prefer simple models when performance is comparable.
+
+3. Risks of autonomous decision-making in safety-critical / human-shared spaces
+------------------------------------------------------------------------------
+Even cooperative coverage/search can intersect with pedestrians, workers, or
+emergency responders. Failure modes include: false-negative obstacle detections,
+consensus on a wrong rendezvous point, swarm congestion at a hotspot, and
+centralised planner single points of failure. High-speed or heavy platforms raise
+injury severity. Ethical deployment requires speed limits, human override, clear
+external signalling, and conservative planning near people — even if that sacrifices
+PSO optimality or shortest-path length.
+
+4. Fault tolerance, robustness, and failure-mode mitigation for multi-agent systems
+---------------------------------------------------------------------------------
+Ring consensus degrades if a link fails; leader election can be re-run periodically.
+Mitigations: redundant topology (add a few long-range links), heartbeat timeouts,
+local safe-stop when communications drop, and diversity in agent policies so a
+shared model bug does not identically fail all robots. Distributed ML training
+(shown with lower but non-zero accuracy) improves resilience to central server loss
+at the cost of consistency.
+
+5. Responsible AI and robotics deployment in the South African context
+---------------------------------------------------------------------
+South Africa's digital and robotics landscape spans world-class labs and under-
+resourced public services. Deployment considerations include:
+  • Equity: automation in mining, warehousing, and security must not silently
+    displace workers without reskilling pathways aligned with national skills policy.
+  • POPIA: camera-based perception in public/workplace settings processes personal
+    information; data minimisation, purpose limitation, and secure retention apply.
+  • Infrastructure reality: intermittent connectivity favours on-robot (distributed)
+    decision-making over cloud-centralised control.
+  • Public trust and language access: explainability materials and incident reporting
+    should be usable beyond English-only technical audiences where systems affect
+    communities.
+  • Dual-use caution: coverage/search swarms have policing and military dual-use;
+    civilian research releases should avoid providing operational targeting playbooks
+    and should emphasise safety, consent, and civilian benefit (e.g., disaster SAR).
+
+Responsible autonomy here means measurable safety envelopes, human accountability,
+privacy compliance under POPIA, and honest communication of simulation limits
+before any real-world pilot.

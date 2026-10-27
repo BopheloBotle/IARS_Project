@@ -1,0 +1,4 @@
+algorithm,path_length,nodes_explored,time_ms,cost
+Dijkstra,48.8701,1301,7.4175,48.8701
+A*_Euclidean,48.8701,420,3.1572,48.8701
+A*_Manhattan,48.8701,42,0.2832,48.8701

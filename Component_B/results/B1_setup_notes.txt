@@ -1,0 +1,28 @@
+
+MULTI-AGENT ENVIRONMENT & CONTROLLER DESIGN JUSTIFICATION
+---------------------------------------------------------
+Platform: Webots world `multi_agent_swarm.wbt` with >=3 E-puck agents.
+
+Cooperative task: Distributed area coverage / cooperative search.
+  Agents must collectively visit high-priority search hotspots (PSO objective)
+  while avoiding collisions. A consensus layer agrees on a shared priority
+  scalar; a leader elected via max-id flood can broadcast a rendezvous cue.
+
+Agent roles:
+  • Explorer (default): runs local PSO update + LiDAR avoidance.
+  • Leader (elected): same motion policy, plus broadcasts consensus target.
+  • Relay: maintains ring-neighbour message forwarding (simulated in scripts;
+    in Webots via Emitter/Receiver on a common channel).
+
+Communication topology: Ring graph (each agent ↔ two neighbours).
+  Chosen because it is sparse, scalable, and sufficient for average consensus
+  convergence while limiting bandwidth — realistic for low-cost robots.
+
+Controller structure:
+  • swarm_agent: per-robot controller (sensing, local PSO particle update,
+    ML action selection for obstacle negotiation, motor commands).
+  • swarm_supervisor (optional): logs global metrics / hotspot coverage.
+
+Environment design: bounded 10x10 m arena with four cardboard-box obstacles
+mirroring search clutter. Hotspots are virtual (objective field), not physical
+props, so coverage quality is measurable from agent trajectories alone.

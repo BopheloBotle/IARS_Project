@@ -1,0 +1,15 @@
+accuracy=0.9310
+success_rate=0.4150
+centralised_accuracy=0.9310
+distributed_mean_accuracy=0.7193
+
+              precision    recall  f1-score   support
+
+     FORWARD      1.000     0.791     0.883        67
+        LEFT      0.952     0.941     0.946       438
+       RIGHT      0.935     0.937     0.936       442
+        STOP      0.732     0.981     0.839        53
+
+    accuracy                          0.931      1000
+   macro avg      0.905     0.912     0.901      1000
+weighted avg      0.936     0.931     0.932      1000

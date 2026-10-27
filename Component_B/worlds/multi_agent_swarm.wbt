@@ -1,0 +1,226 @@
+#VRML_SIM R2023b utf8
+# Component B — Multi-Agent Swarm with Learning-Based Decision-Making
+# Open in Webots and press play. Controllers: swarm_agent (robots), swarm_supervisor
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/robots/gctronic/e-puck/protos/E-puck.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/appearances/protos/Parquetry.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/floors/protos/Floor.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/factory/containers/protos/CardboardBox.proto"
+
+WorldInfo {
+  info [
+    "IARS Component B: Multi-Agent Cooperative Search / Coverage"
+    "Consensus + PSO + ML action selection; >=3 agents; ring topology"
+  ]
+  title "Multi-Agent Swarm"
+  basicTimeStep 16
+}
+Viewpoint {
+  orientation -0.5 0.5 0.7 1.9
+  position 7 6 8
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+Floor {
+  size 10 10
+  appearance Parquetry {
+  }
+}
+
+CardboardBox {
+  translation -1.5 -0.5 0.15
+  name "obstacle_1"
+  size 1 1 0.3
+}
+CardboardBox {
+  translation 2.0 1.8 0.15
+  name "obstacle_2"
+  size 1.2 0.8 0.3
+}
+CardboardBox {
+  translation 0.5 -2.2 0.15
+  name "obstacle_3"
+  size 1.5 0.6 0.3
+}
+
+# Supervisor for logging (optional)
+Robot {
+  name "swarm_supervisor"
+  controller "swarm_supervisor"
+  supervisor TRUE
+  children [
+    Receiver {
+      name "receiver"
+      channel 1
+    }
+  ]
+}
+
+E-puck {
+  translation -3.5 -3.5 0
+  name "agent_0"
+  controller "swarm_agent"
+  controllerArgs [
+    "0"
+  ]
+  turretSlot [
+    Lidar {
+      name "lidar"
+      fieldOfView 6.28318
+      numberOfLayers 1
+      horizontalResolution 180
+      maxRange 2.5
+      type "rotating"
+    }
+    GPS {
+      name "gps"
+    }
+    Compass {
+      name "compass"
+    }
+    Emitter {
+      name "emitter"
+      channel 1
+    }
+    Receiver {
+      name "receiver"
+      channel 1
+    }
+  ]
+}
+
+E-puck {
+  translation 0 -3.5 0
+  name "agent_1"
+  controller "swarm_agent"
+  controllerArgs [
+    "1"
+  ]
+  turretSlot [
+    Lidar {
+      name "lidar"
+      fieldOfView 6.28318
+      numberOfLayers 1
+      horizontalResolution 180
+      maxRange 2.5
+      type "rotating"
+    }
+    GPS {
+      name "gps"
+    }
+    Compass {
+      name "compass"
+    }
+    Emitter {
+      name "emitter"
+      channel 1
+    }
+    Receiver {
+      name "receiver"
+      channel 1
+    }
+  ]
+}
+
+E-puck {
+  translation 3.5 -3.5 0
+  name "agent_2"
+  controller "swarm_agent"
+  controllerArgs [
+    "2"
+  ]
+  turretSlot [
+    Lidar {
+      name "lidar"
+      fieldOfView 6.28318
+      numberOfLayers 1
+      horizontalResolution 180
+      maxRange 2.5
+      type "rotating"
+    }
+    GPS {
+      name "gps"
+    }
+    Compass {
+      name "compass"
+    }
+    Emitter {
+      name "emitter"
+      channel 1
+    }
+    Receiver {
+      name "receiver"
+      channel 1
+    }
+  ]
+}
+
+E-puck {
+  translation -3.5 0 0
+  name "agent_3"
+  controller "swarm_agent"
+  controllerArgs [
+    "3"
+  ]
+  turretSlot [
+    Lidar {
+      name "lidar"
+      fieldOfView 6.28318
+      numberOfLayers 1
+      horizontalResolution 180
+      maxRange 2.5
+      type "rotating"
+    }
+    GPS {
+      name "gps"
+    }
+    Compass {
+      name "compass"
+    }
+    Emitter {
+      name "emitter"
+      channel 1
+    }
+    Receiver {
+      name "receiver"
+      channel 1
+    }
+  ]
+}
+
+E-puck {
+  translation 3.5 0 0
+  name "agent_4"
+  controller "swarm_agent"
+  controllerArgs [
+    "4"
+  ]
+  turretSlot [
+    Lidar {
+      name "lidar"
+      fieldOfView 6.28318
+      numberOfLayers 1
+      horizontalResolution 180
+      maxRange 2.5
+      type "rotating"
+    }
+    GPS {
+      name "gps"
+    }
+    Compass {
+      name "compass"
+    }
+    Emitter {
+      name "emitter"
+      channel 1
+    }
+    Receiver {
+      name "receiver"
+      channel 1
+    }
+  ]
+}

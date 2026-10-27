@@ -1,0 +1,99 @@
+#VRML_SIM R2023b utf8
+# Component A — Perception, Motion Planning and Control
+# Open in Webots, then play. Controller: amr_controller
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/robots/gctronic/e-puck/protos/E-puck.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/appearances/protos/Parquetry.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/floors/protos/Floor.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/factory/containers/protos/CardboardBox.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/factory/walls/protos/Wall.proto"
+
+WorldInfo {
+  info [
+    "IARS Component A: Autonomous Mobile Robot Navigation"
+    "LiDAR + Camera perception, A* planning, PID tracking"
+  ]
+  title "Autonomous Navigation"
+  basicTimeStep 16
+  contactProperties [
+    ContactProperties {
+      material1 "default"
+      material2 "default"
+      coulombFriction [
+        8
+      ]
+    }
+  ]
+}
+Viewpoint {
+  orientation -0.5 0.5 0.7 1.9
+  position 6.5 5.5 7.5
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+Floor {
+  size 12 12
+  appearance Parquetry {
+  }
+}
+
+# Obstacles aligned with shared/environment.py layout (approx world coords)
+Wall {
+  translation 0 2.0 0.05
+  name "wall1"
+  size 4.0 0.2 0.5
+}
+Wall {
+  translation 1.5 -1.0 0.05
+  name "wall2"
+  size 0.2 2.5 0.5
+}
+Wall {
+  translation -2.0 -2.0 0.05
+  name "wall3"
+  size 1.8 1.8 0.5
+}
+Wall {
+  translation 2.5 2.0 0.05
+  name "wall4"
+  size 1.8 1.5 0.5
+}
+CardboardBox {
+  translation 0 -0.5 0.15
+  name "box1"
+  size 0.5 2.5 0.3
+}
+
+E-puck {
+  translation -3.75 3.75 0
+  name "AMR"
+  controller "amr_controller"
+  supervisor TRUE
+  camera_slot [
+    Camera {
+      width 64
+      height 64
+    }
+  ]
+  turretSlot [
+    Lidar {
+      name "lidar"
+      fieldOfView 6.28318
+      numberOfLayers 1
+      horizontalResolution 360
+      maxRange 8
+      type "rotating"
+      noise 0.03
+    }
+    GPS {
+      name "gps"
+    }
+    Compass {
+      name "compass"
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+metric,value
+planned_path_length_m,12.2175144212722
+actual_path_length_m,11.804177345985863
+time_to_goal_s,21.600000000000172
+mean_tracking_error_m,0.09028903205959889
+max_tracking_error_m,0.18863546097036363
+final_position_error_m,0.1101594464627488
+planner_nodes_explored,420
+planner_cost,48.87005768508879
